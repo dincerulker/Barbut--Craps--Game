@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbut</title>
+    <link rel="stylesheet" href="./bootstrap.css">
+</head>
+
+<body>
+    <div class="row justify-content-center mt-3">
+        <div class="col-sm-3  text-center ">
+            <div class="card" style="width: 18rem;">
+                <img id="image"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Two_red_dice_01.svg/2560px-Two_red_dice_01.svg.png"
+                    class="card-img-top" alt="zar">
+                <div class="card-body">
+                    <hr class="my-4">
+                    <h5 class="card-title">Barbut Oyununa Hoşgeldiniz</h5>
+                    <hr class="my-4">
+                    <p id="metin" class="card-text">Oyuna başlamak için zar at butonuna tıklayınız.</p>
+                    <button id="zarAt" class="btn btn-primary">Zar At</button>
+                    <p class="mt-3 text-sm-end mb-0 fs-6 text-secondary">copyright by ulker</p>
+                </div>
+            </div>
+        </div>
+
+        <audio id="sound"></audio>
+
+        <script src="bootstrap.js"></script>
+
+        <script>
+            const sound = document.getElementById("sound");
+            const image = document.getElementById("image");
+            const metin = document.getElementById("metin");
+            const zaratBtn2 = document.getElementById("zarAt");
+
+            zaratBtn2.onclick = function () {
+                sound.src = "rolling.mp3";
+                sound.play();
+                image.src = "dice.gif"
+                const zar1 = Math.floor(Math.random() * 6) + 1;
+                const zar2 = Math.floor(Math.random() * 6) + 1;
+                const zar = zar1 + zar2;
+                if (zar == 2 || zar == 3 || zar == 12) {
+                    metin.innerHTML = "Gelen Zar: " + zar1 + " , " + zar2 + "<br>" + " Kaybettiniz. Tekrar deneyiniz.";
+                } else if (zar == 7 || zar == 11) {
+                    metin.innerHTML = "Gelen Zar: " + zar1 + " , " + zar2 + "<br>" + "Kazandınız.!!!";
+                    sound.src = "win.mp3";
+                    sound.play();
+                } else {
+                    metin.innerHTML = "Gelen Zar: " + zar1 + " , " + zar2 + "<br>" + "Oyun devam ediyor. Tekrar deneyiniz.";
+                }
+            }
+
+            sound.onended = function () {
+                image.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Two_red_dice_01.svg/2560px-Two_red_dice_01.svg.png"
+            }
+
+        </script>
+</body>
+
+</html>
